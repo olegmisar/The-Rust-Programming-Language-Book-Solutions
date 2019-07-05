@@ -1,4 +1,4 @@
-# Guess a number
+# Chapter 2. A guessing game
 
 The game is simple. Guess a number, and you'll be notified whether your guess
 is smaller or bigger than the randomly generated secret number. Then you try
