@@ -55,4 +55,12 @@ mod tests {
     }
 }
 
-fn main() {}
+fn print_converted(s: &str) {
+    println!("{} -> {}", s, english2pig_latin(s));
+
+}
+
+fn main() {
+    print_converted("first");
+    print_converted("apple");
+}
