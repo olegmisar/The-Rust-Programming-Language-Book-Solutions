@@ -1,3 +1,6 @@
+os: linux
 language: rust
 rust:
   - stable
+
+script: ./test.sh
