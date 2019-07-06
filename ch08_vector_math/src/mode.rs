@@ -22,6 +22,7 @@ fn mode(numbers: &Vec<i32>) -> Vec<i32> {
             modes.push(num);
         }
     }
+    modes.sort_unstable();
 
     modes
 }

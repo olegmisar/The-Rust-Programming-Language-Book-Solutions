@@ -1,0 +1,9 @@
+os: linux
+language: rust
+rust:
+  - stable
+
+before_script:
+  - chmod +x ./test.sh
+
+script: ./test.sh
