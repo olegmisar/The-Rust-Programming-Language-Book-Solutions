@@ -1,14 +1,16 @@
-use std::env;
-use std::fs;
+use std::{env, process, fs};
+use ch12_mygrep::Config;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
+    let config = Config::new(&args).unwrap_or_else(|err| {
+        eprintln!("Problem parsing arguments: {}", err);
+        process::exit(1);
+    });
 
-    let query = &args[1];
-    let file_name = &args[2];
-    println!("Searching for {}", query);
-    println!("In file {}", file_name);
+    println!("Searching for {}", config.query);
+    println!("In file {}", config.filename);
 
-    let contents = fs::read_to_string(file_name).expect("Something went wrong reading the file");
+    let contents = fs::read_to_string(config.filename).expect("Something went wrong reading the file");
     println!("Contents:\n{}", contents);
 }
