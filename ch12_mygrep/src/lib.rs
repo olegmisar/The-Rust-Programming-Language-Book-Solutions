@@ -28,9 +28,11 @@ impl Config {
 }
 
 fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+    let query = query.to_lowercase();
+
     contents
         .lines()
-        .filter(|line| line.contains(&query))
+        .filter(|line| line.to_lowercase().contains(&query))
         .collect()
 }
 
@@ -55,6 +57,12 @@ To an admiring bog!";
         assert_eq!(
             search("nobody", POEM),
             vec!["I'm nobody! Who are you?", "Are you nobody, too?"]
+        );
+
+        assert_eq!(
+            search("NOboDy", POEM),
+            vec!["I'm nobody! Who are you?", "Are you nobody, too?"],
+            "Search is not case insensitive",
         );
 
         assert_eq!(search("NOT IN THE POEM", POEM), Vec::<&str>::new());
