@@ -1,16 +1,17 @@
+use std::env;
+
+
 pub struct Config {
     pub query: String,
     pub filename: String,
 }
 
 impl Config {
-    pub fn new(args: &[String]) -> Result<Self, &'static str> {
-        if args.len() < 3 {
-           return Err("Not enough arguments");
-        }
+    pub fn new(mut args: env::Args) -> Result<Self, &'static str> {
+        args.next();
 
-        let query = args[1].clone();
-        let filename = args[2].clone();
+        let query = args.next().ok_or_else(|| "Didn't get a query string")?;
+        let filename = args.next().ok_or_else(|| "Didn't get a filename")?;
 
         Ok(Config { query, filename })
     }
