@@ -1,6 +1,5 @@
-
-use ch12_mygrep::Config;
-use std::{env, fs, process};
+use ch12_mygrep::{run, Config};
+use std::{env, process};
 
 
 fn main() {
@@ -9,9 +8,8 @@ fn main() {
         process::exit(1);
     });
 
-    println!("Searching for {}", config.query);
-    println!("In file {}", config.filename);
-
-    let contents = fs::read_to_string(config.filename).expect("Something went wrong reading the file");
-    println!("Contents:\n{}", contents);
+    if let Err(e) = run(&config) {
+        eprintln!("Application error: {}", e);
+        process::exit(1);
+    }
 }
