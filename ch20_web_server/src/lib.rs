@@ -21,3 +21,19 @@ impl ThreadPool {
 
     }
 }
+
+#[cfg(test)]
+mod thread_pool_tests {
+    use super::ThreadPool;
+
+    #[test]
+    #[should_panic]
+    fn panics_if_zero_pool_size() {
+        ThreadPool::new(0);
+    }
+
+    #[test]
+    fn successful_creation() {
+        ThreadPool::new(4);
+    }
+}
